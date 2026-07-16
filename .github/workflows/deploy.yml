@@ -1,1 +1,44 @@
+name: CI/CD Deploy to EC2
 
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout kode
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies dan build (tahap CI)
+        run: |
+          npm install
+          npm run build --if-present
+
+      - name: Transfer artefak ke EC2 (SCP)
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: ${{ secrets.EC2_PORT }}
+          source: "src/,package.json,scripts/"
+          target: "/home/ubuntu/app_new"
+
+      - name: Eksekusi skrip deployment (SSH)
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: ${{ secrets.EC2_PORT }}
+          script: |
+            chmod +x /home/ubuntu/app_new/scripts/deploy.sh
+            /home/ubuntu/app_new/scripts/deploy.sh
