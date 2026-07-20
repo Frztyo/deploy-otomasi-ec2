@@ -7,7 +7,7 @@ set -e
 
 # ── Konfigurasi path ──────────────────────────────────────────────────────
 APP_DIR="/var/www/stressmeter"            # Direktori nginx serve
-BUILD_SRC="/home/ubuntu/app/dist"         # Hasil build Vite
+BUILD_SRC="/home/ubuntu/app/src/dist"     # Hasil build Vite (di dalam folder src)
 BACKUP_DIR="/home/ubuntu/backup/app_$(date +%Y%m%d_%H%M%S)"
 LOG_FILE="/home/ubuntu/logs/deploy.log"
 REPO_DIR="/home/ubuntu/app"              # Direktori repo hasil git pull
