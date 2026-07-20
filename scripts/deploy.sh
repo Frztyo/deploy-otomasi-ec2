@@ -45,7 +45,10 @@ echo "[FASE 2] Build React selesai. Output: $BUILD_SRC" >> $LOG_FILE
 echo "[FASE 3] Menyalin dist/ ke $APP_DIR..." >> $LOG_FILE
 rm -rf "$APP_DIR"/*
 cp -r "$BUILD_SRC"/. "$APP_DIR/"
-echo "[FASE 3] File berhasil disalin." >> $LOG_FILE
+sudo chown -R www-data:www-data "$APP_DIR"
+sudo find "$APP_DIR" -type d -exec chmod 755 {} \;
+sudo find "$APP_DIR" -type f -exec chmod 644 {} \;
+echo "[FASE 3] File berhasil disalin dan permission disesuaikan." >> $LOG_FILE
 
 # ─────────────────────────────────────────────────────────────────────────────
 # FASE 4: RELOAD NGINX — Agar file baru langsung serve
