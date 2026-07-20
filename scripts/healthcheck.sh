@@ -3,7 +3,7 @@
 # healthcheck.sh — Health check untuk aplikasi React yang diserve via Nginx
 # =============================================================================
 
-APP_URL="http://localhost:9999"       
+APP_URL="http://localhost"       
 MAX_RETRY=5
 RETRY_DELAY=3
 
