@@ -14,9 +14,9 @@
 }
 
 :root {
-  --primary:       #2563eb;
-  --primary-light: #3b82f6;
-  --primary-dark:  #1d4ed8;
+  --primary:       #0d9488; /* Teal / Hijau toska modern */
+  --primary-light: #14b8a6;
+  --primary-dark:  #0f766e;
   --green:         #22c55e;
   --green-light:   #4ade80;
   --yellow:        #f59e0b;
