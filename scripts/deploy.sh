@@ -43,8 +43,8 @@ echo "[FASE 2] Build React selesai. Output: $BUILD_SRC" >> $LOG_FILE
 # FASE 3: SWAP — Salin hasil build ke direktori nginx
 # ─────────────────────────────────────────────────────────────────────────────
 echo "[FASE 3] Menyalin dist/ ke $APP_DIR..." >> $LOG_FILE
-rm -rf "$APP_DIR"/*
-cp -r "$BUILD_SRC"/. "$APP_DIR/"
+sudo rm -rf "$APP_DIR"/*
+sudo cp -r "$BUILD_SRC"/. "$APP_DIR/"
 sudo chown -R www-data:www-data "$APP_DIR"
 sudo find "$APP_DIR" -type d -exec chmod 755 {} \;
 sudo find "$APP_DIR" -type f -exec chmod 644 {} \;
@@ -66,9 +66,9 @@ if [ $? -ne 0 ]; then
   echo "[ERROR] Health check gagal. Menjalankan rollback..." >> $LOG_FILE
 
   # Rollback: kembalikan file backup
-  rm -rf "$APP_DIR"/*
+  sudo rm -rf "$APP_DIR"/*
   if [ "$(ls -A $BACKUP_DIR)" ]; then
-    cp -r "$BACKUP_DIR"/. "$APP_DIR/"
+    sudo cp -r "$BACKUP_DIR"/. "$APP_DIR/"
     sudo systemctl reload nginx
     echo "[ROLLBACK] Versi sebelumnya berhasil dipulihkan dari $BACKUP_DIR." >> $LOG_FILE
   else
