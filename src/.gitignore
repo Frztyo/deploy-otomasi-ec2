@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# File dokumentasi lokal
+perubahan_code.md
