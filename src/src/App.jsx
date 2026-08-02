@@ -1,4 +1,5 @@
 // App.jsx — Routing utama aplikasi
+// v1.0.1 — Pengujian Trigger Otomatis GitHub Actions
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useState, useCallback } from 'react';
 import Navbar from './components/Navbar';
